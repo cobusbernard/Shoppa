@@ -8,7 +8,7 @@ package com.cobusbernard.shoppa.data;
  * 
  * @author Cobus Bernard
  */
-public class ShoppingItem {
+public class ShoppingItem implements Comparable<ShoppingItem> {
 
 	private String name;
 	private boolean inBasket;
@@ -52,6 +52,11 @@ public class ShoppingItem {
 	 */
 	public void setInBasket(boolean inBasket) {
 		this.inBasket = inBasket;
+	}
+
+	@Override
+	public int compareTo(ShoppingItem another) {
+		return this.name.compareTo(another.getName());
 	}
 	
 }

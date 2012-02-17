@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, ShoppaActivity!</string>
     <string name="app_name">Shoppa</string>
+    <string name="tab1_heading">All</string>
+    <string name="tab2_heading">Basket</string>
+    <string name="tab3_heading">Shelf</string>
 
 </resources>
