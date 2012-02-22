@@ -9,4 +9,6 @@
     <CheckBox
         style="@style/ItemCheckboxRow"
         android:id="@+id/item_row_checkbox"/>
+    <TextView
+        style="@style/ItemRightPadRow"/>
 </LinearLayout>

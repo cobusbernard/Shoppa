@@ -9,11 +9,13 @@
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
             
             <!--  Tab 1 -->
             <LinearLayout 
@@ -42,5 +44,10 @@
 	                android:id="@+id/tab3ListView"/>
             </LinearLayout>
         </FrameLayout>
-    </LinearLayout>
+        <Button
+	        style="@style/ButtonAddItem" 
+            android:id="@+id/AddItemButton"
+            android:text="@string/add_item"
+            android:layout_weight="0"/>            
+        </LinearLayout>
 </TabHost>

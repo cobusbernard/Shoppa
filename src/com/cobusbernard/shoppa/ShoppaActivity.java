@@ -1,5 +1,6 @@
 package com.cobusbernard.shoppa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.TabActivity;
@@ -22,9 +23,9 @@ import com.cobusbernard.shoppa.services.ShoppaService;
 public class ShoppaActivity extends TabActivity {
 	
 	private TabHost tabHost;
-	private ListView tab1ListView;
-	private ListView tab2ListView;
-	private ListView tab3ListView;
+	private ListView allListView;
+	private ListView basketListView;
+	private ListView shelfListView;
 	
     /** Called when the activity is first created. */
     @Override
@@ -42,23 +43,21 @@ public class ShoppaActivity extends TabActivity {
      */
     private void init() {
     	this.tabHost = getTabHost();
-    	this.tab1ListView = (ListView) findViewById(R.id.tab1ListView);
-    	this.tab2ListView = (ListView) findViewById(R.id.tab2ListView);
-    	this.tab3ListView = (ListView) findViewById(R.id.tab3ListView);
+    	this.allListView = (ListView) findViewById(R.id.tab1ListView);
+    	this.basketListView = (ListView) findViewById(R.id.tab2ListView);
+    	this.shelfListView = (ListView) findViewById(R.id.tab3ListView);
     }
     
     /**
      * Initialises all the adapters used by GUI objects.
      */
     private void initAdapters() {
-    	List<ShoppingItem> list = (new ShoppaService()).getShoppingList();
-    	
-    	this.tab1ListView.setAdapter(new ShoppingItemListAdapter(this.tab1ListView.getContext(), 
-			list));
-    	this.tab2ListView.setAdapter(new ShoppingItemListAdapter(this.tab2ListView.getContext(), 
-    			list));
-    	this.tab3ListView.setAdapter(new ShoppingItemListAdapter(this.tab3ListView.getContext(), 
-    			list));
+    	this.allListView.setAdapter(new ShoppingItemListAdapter(this.allListView.getContext(), 
+    		getItemList(true, true)));
+    	this.basketListView.setAdapter(new ShoppingItemListAdapter(this.basketListView.getContext(), 
+    		getItemList(true, false)));
+    	this.shelfListView.setAdapter(new ShoppingItemListAdapter(this.shelfListView.getContext(), 
+			getItemList(false, false)));
     }
     
     /**
@@ -107,5 +106,15 @@ public class ShoppaActivity extends TabActivity {
         tv.setText(label);
 
         return ll;
+    }
+    
+    private List<ShoppingItem> getItemList(boolean includeInBasket, boolean includeAll) {
+    	List<ShoppingItem> list = new ArrayList<ShoppingItem>();
+    	for (ShoppingItem item : (new ShoppaService()).getShoppingList()) {
+			if ((item.isInBasket() == includeInBasket) || includeAll) {
+				list.add(item);
+			}
+		}
+    	return list;
     }
 }
